@@ -3,10 +3,12 @@ import Foundation
 /// The gateway class that forwards supported method and property calls to the process-wide global
 /// generator.
 ///
-/// The global generator reads the node configuration from the `SCRU64_NODE_SPEC` environment
-/// variable by default, and it causes a fatal error if it fails to read a well-formed node spec
-/// string (e.g., `"42/8"`, `"0xb00/12"`, `"0u2r85hm2pt3/16"`) when a generator method is first
-/// called. See also ``Scru64NodeSpec`` for the node spec string format.
+/// By default, the global generator reads the node configuration from the `SCRU64_NODE_SPEC`
+/// environment variable when a generator method is first called, and it causes a fatal error if it
+/// fails to do so. The node configuration is encoded in a node spec string consisting of `nodeId`
+/// and `nodeIdSize` integers separated by a slash (e.g., "42/8", "0xb00/12"; see ``Scru64NodeSpec``
+/// for details). You can configure the global generator differently by calling
+/// ``Scru64GlobalGenerator/initialize(nodeSpec:)`` before the default initializer is triggered.
 public final class Scru64GlobalGenerator {
   private static let lock = NSLock()
   private static var instanceRaw: Scru64Generator<Scru64CounterModeDefault>? = nil

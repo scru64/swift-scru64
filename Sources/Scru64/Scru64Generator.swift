@@ -84,6 +84,9 @@ public class Scru64Generator<C: Scru64CounterMode> {
   /// significant timestamp rollback.
   ///
   /// See the ``Scru64Generator`` type documentation for the description.
+  ///
+  /// Note that this mode of generation is not recommended because rewinding `timestamp` without
+  /// changing `nodeId` considerably increases the risk of duplicate results.
   public func generateOrReset() -> Scru64Id {
     lock.lock()
     defer { lock.unlock() }
@@ -134,6 +137,9 @@ public class Scru64Generator<C: Scru64CounterMode> {
   /// generator upon significant timestamp rollback.
   ///
   /// See the ``Scru64Generator`` type documentation for the description.
+  ///
+  /// Note that this mode of generation is not recommended because rewinding `timestamp` without
+  /// changing `nodeId` considerably increases the risk of duplicate results.
   ///
   /// The `rollbackAllowance` parameter specifies the amount of `unixTsMs` rollback that is
   /// considered significant. A suggested value is `10_000` (milliseconds).

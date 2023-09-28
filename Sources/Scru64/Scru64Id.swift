@@ -77,7 +77,7 @@ public struct Scru64Id: Sendable {
   /// Returns the `timestamp` field value.
   public var timestamp: UInt64 { num >> nodeCtrSize }
 
-  /// Returns the `nodeId` and `counter` field values combined as a single integer.
+  /// Returns the `nodeId` and `counter` field values combined as a single 24-bit integer.
   public var nodeCtr: UInt32 { UInt32(truncatingIfNeeded: num) & maxNodeCtr }
 
   /// An error converting an integer into a SCRU64 ID.
